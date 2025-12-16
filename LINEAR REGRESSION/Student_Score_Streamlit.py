@@ -1,9 +1,12 @@
 import streamlit as st
 import pickle
 import numpy as np
+import os
 
-model = pickle.load(open("student_final_model.pkl", "rb"))
-scaler = pickle.load(open("scaler.pkl", "rb"))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = pickle.load(open(os.path.join(BASE_DIR, "student_final_model.pkl"), "rb"))
+scaler = pickle.load(open(os.path.join(BASE_DIR, "scaler.pkl"), "rb"))
 
 st.title("🎓 Student Final Score Prediction App")
 st.write("Predict Final Score using academic and lifestyle factors")
@@ -15,14 +18,8 @@ sleep_hours = st.number_input("Sleep Hours per Day", 0.0, 12.0, 7.0)
 travel_time = st.number_input("Travel Time (hours)", 0.0, 5.0, 1.0)
 library_usage = st.number_input("Library Usage per Week", 0.0, 20.0, 3.0)
 
-features = np.array([[
-    study_hours,
-    attendance,
-    previous_score,
-    sleep_hours,
-    travel_time,
-    library_usage
-]])
+features = np.array([[study_hours, attendance, previous_score,
+                      sleep_hours, travel_time, library_usage]])
 
 if st.button("Predict Final Score"):
     features_scaled = scaler.transform(features)
