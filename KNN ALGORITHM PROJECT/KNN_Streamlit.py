@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 
 # Load trained model
-AI_model = joblib.load("Social_Network_Ads_Streamlit.pkl")
+AI_model = joblib.load("Social_Network_Streamlit.pkl")
 
 # App title
 st.title("🛒 Purchase Prediction App")
