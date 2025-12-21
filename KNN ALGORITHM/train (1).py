@@ -1,13 +1,24 @@
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import StandardScaler
 import joblib
-df=pd.read_csv(r'C:\Users\svija\Documents\Data_Scientist\KNN ALGORITHM\Social_Network_Ads.csv')
-x=df.drop('Purchased',axis=1)
-y=df['Purchased']
-AI_model=KNeighborsClassifier(n_neighbors=300)
-AI_model.fit(x,y)
-# new_data1=int(input("ENTER AGE:"))
-# new_data2=int(input("ENTER SALARY:"))
-# p=AI_model.predict([[new_data1,new_data2]])
-joblib.dump(AI_model,'ans.pkl')
-print("saved")
+
+# Load dataset (local path is OK here)
+df = pd.read_csv("Social_Network_Ads.csv")
+
+X = df[['Age', 'EstimatedSalary']]
+y = df['Purchased']
+
+# Scale features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Train KNN
+model = KNeighborsClassifier(n_neighbors=5)
+model.fit(X_scaled, y)
+
+# Save both model & scaler
+joblib.dump(model, "ans.pkl")
+joblib.dump(scaler, "scaler.pkl")
+
+print("Model and scaler saved successfully")
