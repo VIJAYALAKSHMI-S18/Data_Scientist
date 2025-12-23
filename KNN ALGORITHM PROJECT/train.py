@@ -1,7 +1,8 @@
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 import joblib
-df=pd.read_csv(r'C:\Users\svija\Documents\Data_Scientist\KNN ALGORITHM PROJECT\Social_Network_Ads.csv')
+df=pd.read_csv(r'C:\Users\svija\Documents\Data_Scientist\KNN ALGORITHM PROJECT\DATA_SETS\Social_Network_Ads.csv')
+# print(df.head())
 x=df.drop('Purchased',axis=1)
 y=df['Purchased']
 AI_model=KNeighborsClassifier(n_neighbors=300)
